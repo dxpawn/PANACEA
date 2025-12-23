@@ -38,7 +38,7 @@ Panacea is a tool for protecting images from AI models through imperceptible adv
 | Mode | Purpose | How It Works |
 |------|---------|--------------|
 | **Targeted (Offense)** | Data poisoning | Optimizes perturbations so inputs with a trigger are mapped toward a specific target class chosen by the attacker, causing controlled misclassification. |
-| **Untargeted (Defense)** | Image cloaking | Maximizes loss on the true class so the input exits the correct decision region, preventing reliable recognition without enforcing any specific false label. |
+| **Untargeted (Defense)** | Image cloaking / evasion | Maximizes loss on the true class so the input exits the correct decision region, preventing reliable recognition without enforcing any specific false label. |
 
 ### Visual Quality Enhancements (v1.1)
 - **LPIPS Perceptual Loss**: Uses VGG-based similarity to keep perturbations invisible (~35dB PSNR)
