@@ -1,5 +1,5 @@
 note to self: add vae-based attack later
-untargeted pgd > targeted pgd, in defense mode
+untargeted pgd > targeted pgd, in defense mode, so theres no such thing as "targeted defense"
 write mathematical explanation in latex
 
 <h1 align="center">🛡️ Panacea</h1>
