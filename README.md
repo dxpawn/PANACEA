@@ -1,8 +1,32 @@
-# 🛡️ Panacea
+<h1 align="center">🛡️ Panacea</h1>
 
-**Adversarial Image Perturbation System**
+<p align="center">
+Adversarial Image Perturbation System<br>
+Invisible to Humans • Hostile to Models • Transferable by Design<br>
+<b>Engineered for maximum model damage at minimal visual cost</b>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Attack-PGD%20%7C%20CLIP--Driven-ff5555?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Defense-Image%20Cloaking-4dabf7?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Poisoning-Targeted%20Feature%20Pull-9b59b6?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Perceptual-LPIPS%20%7C%20Saliency-2ecc71?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Backbone-CLIP--Based-f1c40f?style=for-the-badge">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Threat%20Model-Modern%20Diffusion%20Pipelines-critical?style=flat-square">
+  <img src="https://img.shields.io/badge/Visibility-~35dB%20PSNR-success?style=flat-square">
+  <img src="https://img.shields.io/badge/Transferability-Model--Agnostic-informational?style=flat-square">
+</p>
+
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=14&pause=1200&color=36BCF7&center=true&vCenter=true&width=900&lines=CLIP--Aware+Adversarial+Perturbations;Invisible+to+Humans+Not+to+Models;Offense+%7C+Defense+%7C+Hybrid+Attacks;Protect+Your+Pixels+Before+They+Get+Scraped">
+</p>
 
 Panacea is a tool for protecting images from AI models through imperceptible adversarial perturbations. Similar to [Nightshade](https://nightshade.cs.uchicago.edu/) and [Glaze](https://glaze.cs.uchicago.edu/), it modifies images in ways that are invisible to humans but disrupt AI understanding.
+
+---
 
 ## ✨ Features
 
@@ -168,6 +192,48 @@ This tool is designed for **legitimate defensive purposes**:
 - [LPIPS](https://richzhang.github.io/PerceptualSimilarity/) - Learned Perceptual Image Patch Similarity
 - [PGD Attack](https://arxiv.org/abs/1706.06083) - Madry et al., "Towards Deep Learning Models Resistant to Adversarial Attacks"
 
+
 ## 📄 License
 
-GNU GPLv3 - Use responsibly.
+This project is licensed under the **GNU General Public License v3.0 (GPLv3)**.
+
+You are free to:
+- Use, study, and modify the source code
+- Redistribute modified versions under the same license
+
+Under the following conditions:
+- **Derivative works must remain open-source under GPLv3**
+- **Attribution is required**
+- **No warranty is provided**
+
+### Ethical Use Clause (repeated again because this is important)
+This software is intended for **defensive, research, and self-protection purposes only**.
+
+You **must not**:
+- Use Panacea to poison datasets you do not own or control
+- Deploy it at scale against public or community datasets
+- Weaponize it for harassment, sabotage, or model vandalism
+
+If you do, that’s on you - legally, ethically, and karmically.  
+The author disclaims responsibility for misuse.
+
+Use responsibly.
+
+---
+
+## 👤 Author
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/dxpawn">
+        <img src="https://github.com/dxpawn.png" width="96" style="border-radius: 50%"><br />
+        <sub><b>Nguyen Dan Vu</b></sub><br />
+      </a>
+      <sub>
+        Lone Wolf<br/>
+        <i>Professional AI Art Hater</i>
+      </sub>
+    </td>
+  </tr>
+</table>
