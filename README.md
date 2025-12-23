@@ -1,4 +1,6 @@
 note to self: add vae-based attack later
+write mathematical explanation in latex
+
 <h1 align="center">🛡️ Panacea</h1>
 
 <p align="center">
