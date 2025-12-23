@@ -1,3 +1,4 @@
+note to self: add vae-based attack later
 <h1 align="center">🛡️ Panacea</h1>
 
 <p align="center">
