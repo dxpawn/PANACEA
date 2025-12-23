@@ -1,5 +1,11 @@
 note to self: add vae-based attack later
+
 write mathematical explanation in latex
+
+
+
+if anyone is using this, NO IT DOESNT WORK RN, THIS IS NOT READY
+currently the output is constrained to 224x224 😭
 
 <h1 align="center">🛡️ Panacea</h1>
 
