@@ -21,7 +21,7 @@ also, note that some models may have been trained for defense against PGD attack
 however it also comes at a cost, that model loses accuracy on general tasks -> still a win for me
 
 
-<h1 align="center">🛡️ Panacea</h1>
+<h1 align="center">💊 PANACEA</h1>
 
 <p align="center">
 <strong>P</strong>erturbation-based <strong>A</strong>dversarial <strong>N</strong>oise <strong>A</strong>ttack for <strong>C</strong>opyright <strong>E</strong>nforcement and <strong>A</strong>uthorship<br>
