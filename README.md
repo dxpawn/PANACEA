@@ -24,7 +24,7 @@ however it also comes at a cost, that model loses accuracy on general tasks -> s
 <h1 align="center">🛡️ Panacea</h1>
 
 <p align="center">
-Adversarial Image Perturbation System<br>
+<strong>P</strong>erturbation-based <strong>A</strong>dversarial <strong>N</strong>oise <strong>A</strong>ttack for <strong>C</strong>opyright <strong>E</strong>nforcement and <strong>A</strong>uthorship<br>
 Invisible to Humans • Hostile to Models • Transferable by Design<br>
 <b>Engineered for maximum model damage at minimal visual cost</b>
 </p>
