@@ -209,6 +209,7 @@ This tool is designed for **legitimate defensive purposes**:
 
 ## 🔗 References
 
+- [Anti-DreamBooth](https://github.com/VinAIResearch/Anti-DreamBooth) - Data poisoning tool from VinAI
 - [Mist](https://github.com/psyker-team/mist-v2) - Data poisoning tool from several PhD students from US and China
 - [Nightshade](https://nightshade.cs.uchicago.edu/) - Data poisoning tool from UChicago
 - [Glaze](https://glaze.cs.uchicago.edu/) - Style mimicry protection
