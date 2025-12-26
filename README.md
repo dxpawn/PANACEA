@@ -1,25 +1,30 @@
-note to self: add vae-based attack later
+# DISCLAIMER: THIS DOES NOT WORK RIGHT NOW, IT IS NOT READY
 
-write mathematical explanation in latex
+Current limitations:
+- Output constrained to 224x224
+- Is not effective against multimodal big boys like ChatGPT
+- Shows promising effect (increased noise) on weaker models
+- Needs to be more robust (fk you SD) and transferable (fk all of you image gen AIs)
 
+## note to self: 
+- add vae-based attack later
+- This must resist detoxification attempts, e.g.: https://github.com/huzpsb/DeTox/
+- This needs to work against screenshots and similar workarounds
+- write mathematical explanation in latex
+- add batch mode?
+- model too light
 
-
-if anyone is using this, **NO IT DOESNT WORK RN, THIS IS NOT READY**
-
-currently the output is constrained to 224x224 😭
-
-why did i make this: for fun and to stop the AI slop bs
+## why did i make this: for fun and to stop the AI slop bs
 
 also, note that some models may have been trained for defense against PGD attacks like this, so it wouldn't matter to them
 
 however it also comes at a cost, that model loses accuracy on general tasks -> still a win for me
 
 
-
-<h1 align="center">🛡️ Panacea</h1>
+<h1 align="center">💊 PANACEA</h1>
 
 <p align="center">
-Adversarial Image Perturbation System<br>
+<strong>P</strong>erturbation-based <strong>A</strong>dversarial <strong>N</strong>oise <strong>A</strong>ttack for <strong>C</strong>opyright <strong>E</strong>nforcement and <strong>A</strong>uthorship<br>
 Invisible to Humans • Hostile to Models • Transferable by Design<br>
 <b>Engineered for maximum model damage at minimal visual cost</b>
 </p>
@@ -204,6 +209,8 @@ This tool is designed for **legitimate defensive purposes**:
 
 ## 🔗 References
 
+- [Anti-DreamBooth](https://github.com/VinAIResearch/Anti-DreamBooth) - Data poisoning tool from VinAI
+- [Mist](https://github.com/psyker-team/mist-v2) - Data poisoning tool from several PhD students from US and China
 - [Nightshade](https://nightshade.cs.uchicago.edu/) - Data poisoning tool from UChicago
 - [Glaze](https://glaze.cs.uchicago.edu/) - Style mimicry protection
 - [CLIP](https://openai.com/research/clip) - OpenAI's vision-language model
