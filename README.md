@@ -1,18 +1,18 @@
-# DISCLAIMER: THIS DOES NOT WORK RIGHT NOW, IT IS NOT READY
+# DISCLAIMER: THIS STILL DOES NOT WORK, BUT ITS GETTING THERE I GUESS (v1.2)
 
-Current limitations:
-- Output constrained to 224x224
-- Is not effective against multimodal big boys like ChatGPT
-- Shows promising effect (increased noise) on weaker models
+ **New shit**:
+- ~~Output constrained to 224x224~~ -> Now supports ANY resolution via tiled processing (theoretically)
+- ~~add vae-based attack later~~ -> VAE attack added
+- ~~write mathematical explanation in latex~~ -> See `report.tex` (if i make any mistakes then you can correct me)
+
+ **Remaining limitations:**
+- Not effective against multimodal big boys like ChatGPT (yet)
+- Shows promising effect on weaker models 
 - Needs to be more robust (fk you SD) and transferable (fk all of you image gen AIs)
-
-## note to self: 
-- add vae-based attack later
-- This must resist detoxification attempts, e.g.: https://github.com/huzpsb/DeTox/
-- This needs to work against screenshots and similar workarounds
-- write mathematical explanation in latex
-- add batch mode?
-- model too light
+- Must resist detoxification attempts, e.g.: https://github.com/huzpsb/DeTox/
+- Needs to work against screenshots and similar workarounds
+- Maybe add batch mode?
+- train train train train train
 
 ## why did i make this: for fun and to stop the AI slop bs
 
@@ -60,13 +60,18 @@ Panacea is a tool for protecting images from AI models through imperceptible adv
 | **Targeted (Offense)** | Data poisoning | Optimizes perturbations so inputs with a trigger are mapped toward a specific target class chosen by the attacker, causing controlled misclassification. |
 | **Untargeted (Defense)** | Image cloaking / evasion | Maximizes loss on the true class so the input exits the correct decision region, preventing reliable recognition without enforcing any specific false label. |
 
-### Visual Quality Enhancements (v1.1)
+### Initial (v1.1)
 - **LPIPS Perceptual Loss**: Uses VGG-based similarity to keep perturbations invisible (~35dB PSNR)
 - **Saliency Masking**: Reduces perturbations on edges and important features
 - **Hybrid Attack**: Combined push-and-pull for maximum disruption
 - **CLIP-based**: Targets the backbone of modern AI art generators (Stable Diffusion, DALL-E, Midjourney)
 
-## 🚀 Installation
+### In v1.2
+- **Full Resolution Processing**: No more 224×224 limitation! Tiled processing preserves original resolution (kinda lmao)
+- **VAE-based Attack**: Latent space perturbations for more natural adversarial examples (not sure if it works)
+- **LaTeX Report**: Mathematical foundations in `report.tex` (NeurIPS format, but it's a mess rn)
+
+## Installation
 
 ```bash
 # Clone or download the repository
@@ -81,7 +86,7 @@ pip install -r requirements.txt
 - PyTorch 2.0+
 - CUDA-capable GPU (recommended for faster processing)
 
-## 📖 Usage
+## Usage
 
 ### Quick Demo
 
@@ -130,7 +135,36 @@ python main.py analyze -i image.png -l "cat" -l "dog" -l "abstract art"
 python main.py compare -o original.png -p perturbed.png
 ```
 
-## ⚙️ Parameters
+### Resolution Preservation
+Process images at ANY resolution using tiled processing:
+
+```bash
+# Attack a high-res image (e.g., 4000x3000)
+python main.py attack-fullres -i highres.jpg -o protected.jpg -m targeted -t "abstract art"
+
+# Limit max dimension for faster processing
+python main.py attack-fullres -i huge.png -o out.png -m untargeted -l "portrait" --max-size 2048
+```
+
+**How it works:**
+1. Splits image into overlapping 224×224 tiles (32px overlap by default)
+2. Applies attack to each tile independently
+3. Blends tiles with linear interpolation at overlaps
+4. Output retains original resolution
+5. If this fucks the image up, I blame ChatGPT
+
+### VAE-based Attack (hopefully better?)
+Perturb latent space for more natural adversarial examples:
+
+```bash
+# VAE-based targeted attack
+python main.py vae-attack -i photo.png -o output.png -m targeted -t "abstract art"
+
+# VAE-based untargeted attack (cloaking)
+python main.py vae-attack -i portrait.png -o cloaked.png -m untargeted -l "human face"
+```
+
+## Parameters
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
@@ -142,7 +176,7 @@ python main.py compare -o original.png -p perturbed.png
 | `--no-saliency` | - | Disable saliency-based masking. |
 | `--device`, `-d` | auto | `cuda` or `cpu`. Auto-detects GPU. |
 
-## 🔬 How It Works
+## How It Works
 
 Panacea uses **Projected Gradient Descent (PGD)** with **LPIPS perceptual constraints**:
 
@@ -166,7 +200,7 @@ CLIP is the backbone of most modern AI image generators:
 
 Perturbations effective against CLIP transfer well to these downstream models.
 
-## 📊 Quality Metrics
+## Quality Metrics
 
 - **PSNR (Peak Signal-to-Noise Ratio)**: Higher = less visible perturbation
   - \>40 dB: Virtually invisible
@@ -181,17 +215,65 @@ Perturbations effective against CLIP transfer well to these downstream models.
 
 ```
 Panacea/
-├── main.py              # Entry point
-├── requirements.txt     # Dependencies
-├── README.md           # This file
+├── main.py                 # Entry point
+├── report.tex              # LaTeX report (NeurIPS format)
+├── requirements.txt        # Dependencies
+├── README.md              # This file
 └── panacea/
-    ├── __init__.py     # Package initialization
-    ├── models.py       # CLIP model wrapper
-    ├── attacks.py      # PGD attack with perceptual loss
-    ├── perceptual.py   # LPIPS and saliency masking
-    ├── utils.py        # Image I/O and metrics
-    └── cli.py          # Command line interface
+    ├── __init__.py        # Package initialization
+    ├── models.py          # CLIP model wrapper
+    ├── attacks.py         # PGD attack with perceptual loss
+    ├── perceptual.py      # LPIPS and saliency masking
+    ├── full_resolution.py # Tile-based full-res processing (v1.2)
+    ├── vae_attack.py      # VAE latent space attacks (v1.2)
+    ├── utils.py           # Image I/O and metrics
+    └── cli.py             # Command line interface
 ```
+
+## Improving Attack Effectiveness
+
+### Training the VAE
+The VAE can be trained on your own image dataset for better reconstruction:
+
+```python
+from panacea.vae_attack import SimpleVAE, train_vae
+from torch.utils.data import DataLoader
+from torchvision.datasets import ImageFolder
+import torchvision.transforms as T
+
+# Prepare dataset
+transform = T.Compose([T.Resize(224), T.CenterCrop(224), T.ToTensor()])
+dataset = ImageFolder("path/to/images", transform=transform)
+loader = DataLoader(dataset, batch_size=32, shuffle=True)
+
+# Train VAE
+vae = SimpleVAE()
+trained_vae = train_vae(vae, loader, epochs=50, device="cuda")
+
+# Use trained VAE for attacks
+from panacea import VAEAttack, load_clip_model
+clip = load_clip_model()
+attacker = VAEAttack(clip, vae=trained_vae)
+```
+
+### Other Ways to Improve Attacks
+
+| Method | Description | Difficulty |
+|--------|-------------|------------|
+| **Ensemble attacks** | Optimize against multiple CLIP models (ViT-B/32, ViT-L/14, RN50) | Medium |
+| **Longer optimization** | More iterations (500+) with smaller step size | Easy |
+| **Lower perceptual weight** | Trade visibility for stronger attack | Easy |
+| **Train VAE on target domain** | Better latent space for specific image types | Medium |
+| **Diffusion-based attacks** | Use SD's U-Net gradients directly | Hard |
+| **A lot more methods that I haven't found out yet** | it takes me on average 2 hours just to read one paper | Impossible |
+
+## Future Directions
+
+- [ ] **Batch processing mode** for multiple images
+- [ ] **Frequency-domain attacks** (DCT/FFT perturbations)
+- [ ] **Multi-model ensemble** (CLIP + DINO + DINOv2)
+- [ ] **Anti-screenshot robustness** (survive JPEG/resize)
+- [ ] **DeTox resistance** testing
 
 ## ⚠️ Ethical Considerations
 
@@ -207,7 +289,7 @@ This tool is designed for **legitimate defensive purposes**:
 - Maliciously poisoning public datasets (I will find you and I will beat the shit out of you, personally)
 - Bypassing content moderation systems
 
-## 🔗 References
+## References
 
 - [Anti-DreamBooth](https://github.com/VinAIResearch/Anti-DreamBooth) - Data poisoning tool from VinAI
 - [Mist](https://github.com/psyker-team/mist-v2) - Data poisoning tool from several PhD students from US and China
@@ -216,9 +298,9 @@ This tool is designed for **legitimate defensive purposes**:
 - [CLIP](https://openai.com/research/clip) - OpenAI's vision-language model
 - [LPIPS](https://richzhang.github.io/PerceptualSimilarity/) - Learned Perceptual Image Patch Similarity
 - [PGD Attack](https://arxiv.org/abs/1706.06083) - Madry et al., "Towards Deep Learning Models Resistant to Adversarial Attacks"
+- A bunch of other very famous and helpful paper that I won't have the space to list here, but it would be helpful if you've read about DDPM, VAE, GAN, and all that epic shit
 
-
-## 📄 License
+## License
 
 This project is licensed under the **GNU General Public License v3.0 (GPLv3)**.
 
@@ -262,3 +344,7 @@ Use responsibly.
     </td>
   </tr>
 </table>
+
+---
+
+and no I don't fap to AI-generated Mirko anymore, screw you mfs
